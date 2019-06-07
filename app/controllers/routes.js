@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Cursosv = require('../models/cursosv');
+const cursosv = require('../models/cursosv');
 const router = express.Router();
 
 // Setting up the output format of our endpoints
@@ -18,9 +18,9 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/', function (req, res) {
+/* router.get('/', function (req, res) {
     res.sendFile(__dirname + '/login.html');
-});
+}); */
 
 /* ------------------------------------------------
             ENDPOINTS' CRUD METHODS
@@ -34,7 +34,7 @@ router.get('/', function (req, res) {
 
 router.route('/cursosv')
     .post(function (req, res) {
-        let cursosv = new Cursosv();
+        let cursosv = new cursosv();
         cursosv.nombrecurso = req.body.nombrecurso;
         cursosv.precio = req.body.precio;
         cursosv.detalle = req.body.detalle;
@@ -45,7 +45,7 @@ router.route('/cursosv')
         })
     })
     .get(function (req, res) {
-        let cursosv = new Cursosv();
+        let cursosv = new cursosv();
         cursosv.find(function (error, cursosv) {
             if (error)
                 res.status(500).send('Error al mostrar:' + error);
@@ -55,7 +55,7 @@ router.route('/cursosv')
 
 router.route('/cursosv/:cursosv_id')
     .get(function (req, res) {
-        let cursosv = new Cursosv();
+        let cursosv = new cursosv();
         cursosv.findById(req.params.cursosv_id, function (error, cursosv) {
             if (error)
                 res.status(500).send('Error al mostrar:' + error);
@@ -63,7 +63,7 @@ router.route('/cursosv/:cursosv_id')
         })
     })
     .put(function (req, res) {
-        let cursosv = new Cursosv();
+        let cursosv = new cursosv();
         cursosv.findById(req.params.cursosv_id, function (error, cursosv) {
             if (error)
                 res.status(500).send('Error al mostrar:' + error);
@@ -82,7 +82,7 @@ router.route('/cursosv/:cursosv_id')
         });
     })
     .delete(function (req, res) {
-        let cursosv = new Cursosv();
+        let cursosv = new cursosv();
         cursosv.remove({
             _id: req.params.cursosv_id
         }, function (error) {
