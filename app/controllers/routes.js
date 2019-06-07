@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cursosv = require('../models/cursosv');
 const router = express.Router();
-
+let cursosv = new cursosv();
 // Setting up the output format of our endpoints
 
 router.use(bodyParser.urlencoded({ extended: true }));
