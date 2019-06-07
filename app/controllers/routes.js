@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Cursosv = require('../models/cursosv');
-let cursosv = new Cursosv();
 const router = express.Router();
 
 // Setting up the output format of our endpoints
@@ -46,6 +45,7 @@ router.route('/cursosv')
         })
     })
     .get(function (req, res) {
+        let cursosv = new Cursosv();
         cursosv.find(function (error, cursosv) {
             if (error)
                 res.status(500).send('Error al mostrar:' + error);
@@ -55,6 +55,7 @@ router.route('/cursosv')
 
 router.route('/cursosv/:cursosv_id')
     .get(function (req, res) {
+        let cursosv = new Cursosv();
         cursosv.findById(req.params.cursosv_id, function (error, cursosv) {
             if (error)
                 res.status(500).send('Error al mostrar:' + error);
@@ -62,6 +63,7 @@ router.route('/cursosv/:cursosv_id')
         })
     })
     .put(function (req, res) {
+        let cursosv = new Cursosv();
         cursosv.findById(req.params.cursosv_id, function (error, cursosv) {
             if (error)
                 res.status(500).send('Error al mostrar:' + error);
@@ -72,12 +74,15 @@ router.route('/cursosv/:cursosv_id')
             cursosv.save(function (error) {
                 if (error)
                     res.status(500).send('Error al actualizar:' + error);
-                res.json({ message: "SUCCESS: Course updated successfully",
-            cursosv: cursosv });
+                res.json({
+                    message: "SUCCESS: Course updated successfully",
+                    cursosv: cursosv
+                });
             });
         });
     })
     .delete(function (req, res) {
+        let cursosv = new Cursosv();
         cursosv.remove({
             _id: req.params.cursosv_id
         }, function (error) {
